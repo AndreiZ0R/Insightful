@@ -24,14 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Services\Interfaces\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="DTOs\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Mappings\" />
+    <Folder Include="Services\Interfaces\" />
     <Folder Include="Errors\" />
-    <Folder Include="Repositories\Interfaces\" />
   </ItemGroup>
 
 </Project>
