@@ -6,6 +6,8 @@ import HomePage from "./pages/home/HomePage.tsx";
 import RegisterPage from "./pages/auth/RegisterPage.tsx";
 import "./style/globals.scss"
 import LoginPage from "./pages/auth/LoginPage.tsx";
+import CreateProfilePage from "./pages/profile/CreateProfilePage.tsx";
+import ProfilePage from "./pages/profile/ProfilePage.tsx";
 
 const queryClient: QueryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -22,8 +24,12 @@ const router = createBrowserRouter([
         element: <LoginPage/>
     },
     {
-        path: "/home",
-        element: <HomePage/>
+        path: "/create-profile",
+        element: <CreateProfilePage/>
+    },
+    {
+        path: "/profile/",
+        element: <ProfilePage/>
     },
     {
         path: "*",

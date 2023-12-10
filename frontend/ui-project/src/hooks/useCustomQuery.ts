@@ -35,7 +35,6 @@ const useBigLayout = () => {
         queryFn: retrieveBigLayout
     });
 }
-
 const setBigLayout = (big: boolean) => {
     const bigJson = JSON.stringify(big);
     localStorage.setItem(Queries.BIG_LAYOUT, bigJson);
@@ -85,9 +84,9 @@ const retrieveLoggedUser = (): UserModel => {
     return JSON.parse(user ?? "");
 }
 
-const setLoggedUser = (loggedIn: UserLoggedIn) => {
-    const userJson = JSON.stringify(loggedIn.user);
-    localStorage.setItem(Queries.TOKEN, loggedIn.token);
+const setLoggedUser = ({user, token}: UserLoggedIn) => {
+    const userJson = JSON.stringify(user);
+    localStorage.setItem(Queries.TOKEN, token);
     localStorage.setItem(Queries.LOGGED_USER, userJson);
 }
 

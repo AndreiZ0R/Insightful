@@ -3,7 +3,7 @@ import {ChangeEvent, useState} from "react";
 import AppInput from "../../components/input/AppInput.tsx";
 import AuthCard from "./AuthCard.tsx";
 import {useLogin, useUpdateLoggedUser} from "../../hooks/useCustomQuery.ts";
-import {AuthUser, UserModel} from "../../models/response.ts";
+import {AuthUser, UserLoggedIn} from "../../models/response.ts";
 
 
 export default function LoginPage() {
@@ -25,7 +25,7 @@ export default function LoginPage() {
 
     const doLogin = () => {
         loginMutation.mutate(loginForm, {
-            onSuccess: (data: UserModel) => {
+            onSuccess: (data: UserLoggedIn) => {
                 setLoggedUser.mutate(data);
                 navigate("/");
             }
