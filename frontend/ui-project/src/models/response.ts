@@ -21,11 +21,38 @@ interface UserRegister extends Model {
     userType: UserType
 }
 
+interface Study {
+    studyId: bigint,
+    studyUserId: bigint,
+    startDate: string,
+    endDate: string,
+    degree: string,
+    studyLocation: string
+}
+
+interface Skill {
+    skillId: bigint,
+    userSkillId: bigint,
+    skillName: string
+}
+
+interface Experience {
+    experienceId: bigint,
+    experienceUserId: bigint,
+    startDate: string,
+    endDate: string,
+    company: string,
+    position: string,
+    skills: Skill[]
+}
+
 interface Profile extends Model {
     profileId: bigint,
     currentTitle: string,
     currentWorkplace: string,
-//TODO: add
+    description: string,
+    studies: Study[],
+    experiences: Experience[]
 }
 
 interface UserModel extends UserRegister {
@@ -40,17 +67,3 @@ interface UserLoggedIn extends Model {
 type AppResponse = BaseResponse | BaseResponse[]
 
 export type {Model, AppResponse, UserRegister, UserModel, Profile, AuthUser, UserLoggedIn}
-
-/*
-    {
-        name: "..",
-        profile: ".."
-        token: "..."
-    }
-
-
-    {
-    user: UserModel{},
-    token: "..."
-    }
- */
