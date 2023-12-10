@@ -1,0 +1,30 @@
+@import "../../style/variables";
+
+.create-profile-wrapper {
+  height: 100vh;
+  width: 100%;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1019%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='rgba(81%2c 46%2c 95%2c 1)'%3e%3c/rect%3e%3cpath d='M0%2c533.673C101.574%2c555.829%2c206.409%2c513.115%2c297.127%2c462.338C391.702%2c409.402%2c474.448%2c335.626%2c525.056%2c239.785C577.423%2c140.613%2c597.983%2c27.263%2c585.731%2c-84.215C573.219%2c-198.054%2c536.311%2c-313.563%2c455.336%2c-394.551C376.579%2c-473.32%2c262.755%2c-505.359%2c152.079%2c-517.934C53%2c-529.192%2c-44.772%2c-502.922%2c-135.565%2c-461.69C-217.346%2c-424.551%2c-273.033%2c-354.496%2c-339.889%2c-294.515C-417.689%2c-224.714%2c-539.172%2c-182.92%2c-560.365%2c-80.568C-581.491%2c21.462%2c-506.997%2c120.173%2c-442.735%2c202.19C-387.509%2c272.675%2c-295.744%2c294.986%2c-224.065%2c348.653C-144.926%2c407.906%2c-96.592%2c512.604%2c0%2c533.673' fill='%23351e3e'%3e%3c/path%3e%3cpath d='M1440 996.918C1522.825 983.442 1600.401 962.9929999999999 1677.078 928.9010000000001 1766.7 889.053 1890.304 873.212 1924.761 781.383 1959.659 688.377 1862.035 599.042 1836.912 502.933 1815.4560000000001 420.85400000000004 1829.873 332.224 1788.0529999999999 258.411 1740.739 174.89999999999998 1678.794 87.423 1586.523 60.988 1494.347 34.58000000000004 1404.064 97.40899999999999 1311.344 121.83800000000002 1215.444 147.10500000000002 1105.166 139.399 1032.5520000000001 206.945 957.806 276.473 921.887 383.244 920.587 485.32 919.356 581.953 987.587 660.398 1025.646 749.229 1064.83 840.6859999999999 1062.1480000000001 964.008 1147.551 1015.059 1233.118 1066.208 1341.605 1012.928 1440 996.918' fill='%236d3e80'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1019'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-profile-card {
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 8px 32px 0 $primary-color-opaque;
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border-radius: $border-radius-medium;
+
+  padding: $padding-small $padding-xl;
+  min-width: 50%;
+  max-width: 80%;
+  max-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
