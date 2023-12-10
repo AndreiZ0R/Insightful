@@ -1,0 +1,22 @@
+@import "../../style/variables";
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 0.3rem;
+}
+
+.checkbox-wrapper input[type=checkbox] {
+  margin-left: 0.3rem;
+  border-radius: $border-radius-big;
+  padding: $padding-small;
+  accent-color: $primary-color;
+  outline: none;
+  border: none;
+}
+
+.checkbox-wrapper input:checked {
+  background-color: $primary-color;
+  color: $background-color-white;
+}

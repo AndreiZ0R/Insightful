@@ -1,0 +1,18 @@
+@import "../../style/variables";
+
+label {
+  font-size: $font-size-medium-small;
+}
+
+input[type=date] {
+  background-color: transparent;
+  color: $background-color-dark;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid $background-color-white;
+  transition: all 250ms ease;
+}
+
+input[type=date]:focus {
+  border-bottom: 2px solid $primary-color;
+}
