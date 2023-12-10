@@ -67,7 +67,7 @@ export default function RegisterPage() {
             onSuccess: () => {
                 const token = localStorage.getItem(Queries.TOKEN);
                 if (token) {
-                    navigate("/")
+                    navigate("/create-profile")
                 }
             }
         })
