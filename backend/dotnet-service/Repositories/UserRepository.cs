@@ -1,4 +1,5 @@
 ﻿using BookMySeatApi.Repositories;
+using dotnet_service.Data;
 using dotnet_service.Models;
 using dotnet_service.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;

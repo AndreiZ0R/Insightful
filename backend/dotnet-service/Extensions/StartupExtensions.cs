@@ -1,11 +1,12 @@
-﻿using BookMySeatApi.Repositories.Interfaces;
-using BookMySeatApi.Repositories;
-using dotnet_service.Models;
-using dotnet_service.Repositories.Interfaces;
+﻿using BookMySeatApi.Repositories;
+using BookMySeatApi.Repositories.Interfaces;
+using dotnet_service.Data;
+using dotnet_service.Mappings;
+using dotnet_service.Middleware;
 using dotnet_service.Repositories;
+using dotnet_service.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using static dotnet_service.Commons.CommonConstants;
-using dotnet_service.Mappings;
 
 namespace dotnet_service.Extensions
 {
@@ -52,6 +53,13 @@ namespace dotnet_service.Extensions
         {
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProfileRepository, ProfileRepository>();
+            return services;
+        }
+
+        public static IServiceCollection AddMiddlewareServices(this IServiceCollection services)
+        {
+            services.AddSingleton<ErrorHandlerMiddleware>();
             return services;
         }
     }

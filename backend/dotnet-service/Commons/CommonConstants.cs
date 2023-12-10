@@ -12,5 +12,12 @@
             JobSeeker,
             Recruiter
         }
+
+        public static class VisionStatus
+        {
+            public static readonly string PartialBlindness = "Partial Blindness";
+            public static readonly string FullBlindness = "Full Blindness";
+            public static readonly string NotSpecified = "Not specified";
+        }
     }
 }

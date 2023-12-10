@@ -1,4 +1,5 @@
 using dotnet_service.Extensions;
+using dotnet_service.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddHttpClientServices();
 builder.Services.AddDataContext(builder.Configuration);
 builder.Services.AddMappingProfiles();
 builder.Services.AddRepositories();
+builder.Services.AddMiddlewareServices();
 
 var app = builder.Build();
 
@@ -26,6 +28,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

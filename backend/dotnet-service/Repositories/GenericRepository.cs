@@ -1,5 +1,5 @@
 ﻿using BookMySeatApi.Repositories.Interfaces;
-using dotnet_service.Models;
+using dotnet_service.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookMySeatApi.Repositories;
@@ -7,6 +7,7 @@ namespace BookMySeatApi.Repositories;
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
     private readonly DataContext _context;
+
     public GenericRepository(DataContext context)
     {
         _context = context;
