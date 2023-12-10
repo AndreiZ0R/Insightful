@@ -7,7 +7,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import {useLoggedUser} from '../../hooks/useCustomQuery';
 import Navbar from "../../components/navbar/AppNavBar.tsx";
 import {BACKGROUND_DARK, BACKGROUND_LIGHT, PRIMARY_COLOR} from '../../constants/theming.ts';
-import React, {useEffect} from "react";
+import {useEffect} from "react";
 import {getCv} from "../../api/api.ts";
 
 export default function ProfilePage() {
@@ -32,8 +32,10 @@ export default function ProfilePage() {
 
     return (
         <>
+            {/*<Speech text="Macarena">*/}
+            {/*    */}
+            {/*</Speech>*/}
             <Navbar/>
-
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'column',
