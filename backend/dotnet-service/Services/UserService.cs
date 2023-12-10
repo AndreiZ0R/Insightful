@@ -1,6 +1,6 @@
 ﻿namespace dotnet_service.Services
 {
-    public class TestService
+    public class UserService
     {
     }
 }

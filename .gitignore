@@ -58,3 +58,12 @@
 /backend/dotnet-service/obj/dotnet-service.csproj.nuget.g.targets
 /backend/dotnet-service/obj/project.assets.json
 /backend/dotnet-service/obj/project.nuget.cache
+*.vsidx
+/backend/dotnet-service/.vs/dotnet-service/FileContentIndex/1a137ea1-85d1-4c14-95b8-0061adca7225.vsidx
+/backend/dotnet-service/.vs/dotnet-service/FileContentIndex/3aa53aa2-1d9e-4231-8238-9809c7db8c78.vsidx
+/backend/dotnet-service/.vs/dotnet-service/v17/.futdcache.v2
+/backend/dotnet-service/.vs/ProjectEvaluation/dotnet-service.metadata.v6.1
+/backend/dotnet-service/.vs/ProjectEvaluation/dotnet-service.projects.v6.1
+/backend/dotnet-service/dotnet-service.csproj
+/backend/dotnet-service/dotnet-service.csproj.user
+/backend/dotnet-service/obj/dotnet-service.csproj.EntityFrameworkCore.targets

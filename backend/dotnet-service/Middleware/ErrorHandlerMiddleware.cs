@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using dotnet_service.Errors;
+using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Text.Json;
 
