@@ -1,9 +1,10 @@
+import {useAllJobs, useLoggedUser} from "../../hooks/useCustomQuery";
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
 import {Queries} from "../../constants/constants.ts";
-import {useAllJobs, useLoggedUser} from "../../hooks/useCustomQuery.ts";
+import React, {useEffect} from "react";
 import AppNavBar from "../../components/navbar/AppNavBar.tsx";
-import JobPostComponent from "../../components/job-post/JobPost.tsx";
+import JobPost from "../../components/job-post/JobPost.tsx";
+
 
 export default function HomePage() {
     const {data: user} = useLoggedUser();
@@ -17,7 +18,8 @@ export default function HomePage() {
 
     useEffect(() => {
         console.log(user);
-    }, [user]);
+        console.log(jobs)
+    }, [user, jobs, navigate]);
 
     return (
         <>
@@ -32,7 +34,7 @@ export default function HomePage() {
             }}>
                 {jobs?.map((jobPost, index) => (
                     <div style={{maxWidth: '1000px', width: '100%'}}>
-                        <JobPostComponent key={index} jobPost={jobPost}/>
+                        <JobPost key={index} jobPost={jobPost}/>
                     </div>
                 ))}
             </div>
