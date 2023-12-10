@@ -9,5 +9,7 @@ export const Queries = {
     REGISTER: "register",
     TOKEN: "token",
     LOGIN: "login",
-    LOGGED_USER: "loggedUser"
+    STORED_USER: "storedUser",
+    LOGGED_USER: "loggedUser",
+    GET_CV: "getCv"
 }

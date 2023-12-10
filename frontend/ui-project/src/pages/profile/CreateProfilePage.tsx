@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import {Box, Button, Card, CardContent, Divider, Grid, SxProps, TextField} from '@mui/material';
-import {ExperienceCreate, ProfileCreate, Registration, StudyCreate} from '../../models/response';
+import {ExperienceCreate, ProfileCreate, Registration, StudyCreate, UserLoggedIn} from '../../models/response';
 import {useRegister, useStoredUser} from "../../hooks/useCustomQuery.ts";
 import {useNavigate} from 'react-router-dom';
 
@@ -140,7 +140,7 @@ export default function CreateProfilePage() {
 
     useEffect(() => {
         if (user === undefined) navigate("/register");
-    }, [user]);
+    }, [user, navigate]);
 
     const handleProfileChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setProfile({...profile, [e.target.name]: e.target.value});
@@ -193,12 +193,13 @@ export default function CreateProfilePage() {
                 ...user,
                 profile: profile
             }
-            console.log("register: " + registration);
+            console.log(registration);
 
             registerUserProfile.mutate(registration, {
-                onSuccess: (data) => {
+                onSuccess: (data: UserLoggedIn) => {
                     console.log(data);
-                    navigate("/profile");
+                    // navigate("/profile");
+                    navigate("/");
                 }
             })
         }

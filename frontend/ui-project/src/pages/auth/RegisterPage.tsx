@@ -5,7 +5,7 @@ import AppInput from "../../components/input/AppInput.tsx";
 import {useNavigate} from "react-router-dom";
 import AuthCard from "./AuthCard.tsx";
 import {useChangeLayout, useUpdateStoredUser} from "../../hooks/useCustomQuery.ts";
-import AppCheckbox from "../../components/AppCheckbox/AppCheckbox.tsx";
+import AppCheckbox from "../../components/checkbox/AppCheckbox.tsx";
 import AppDatePicker from "../../components/date-picker/AppDatePicker.tsx";
 import {UserRegister} from "../../models/response.ts";
 

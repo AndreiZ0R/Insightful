@@ -1,10 +1,11 @@
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import {Queries} from "../../constants/constants.ts";
-import {useStoredUser} from "../../hooks/useCustomQuery.ts";
+import {useLoggedUser} from "../../hooks/useCustomQuery.ts";
+import AppNavBar from "../../components/navbar/AppNavBar.tsx";
 
 export default function HomePage() {
-    const {data: user} = useStoredUser();
+    const {data: user} = useLoggedUser();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,6 +19,7 @@ export default function HomePage() {
 
     return (
         <>
+            <AppNavBar/>
             <div>Data: {user?.name}</div>
         </>
     )

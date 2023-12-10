@@ -1,8 +1,8 @@
 import {QueryClient, QueryFunction, useMutation, useQuery, useQueryClient, UseQueryResult} from "react-query";
-import {AppResponse, AuthUser, Model, Registration, UserLoggedIn, UserRegister} from "../models/response.ts";
+import {AppResponse, AuthUser, Model, Registration, UserLoggedIn, UserModel, UserRegister} from "../models/response.ts";
 import {useState} from "react";
 import {Queries} from "../constants/constants.ts";
-import {login, register} from "../api/api.ts";
+import {getCv, login, register} from "../api/api.ts";
 
 type TransformerFunction = <T extends Model>(response: AppResponse) => T;
 
@@ -53,15 +53,20 @@ const useChangeLayout = () => {
     });
 }
 
+const saveUserAfterLogin = (data: UserLoggedIn) => {
+    const token: string = data.token;
+    const userJson: string = JSON.stringify(data.user);
+
+    localStorage.setItem(Queries.TOKEN, token);
+    localStorage.setItem(Queries.LOGGED_USER, userJson)
+}
+
 const useRegister = () => {
     // const queryClient: QueryClient = useQueryClient();
     return useMutation({
         mutationKey: Queries.REGISTER,
         mutationFn: (registration: Registration) => register(registration),
-        onSuccess: (data: UserLoggedIn) => {
-            const token: string = data.token;
-            localStorage.setItem(Queries.TOKEN, token);
-        }
+        onSuccess: (data: UserLoggedIn) => saveUserAfterLogin(data)
     })
 }
 
@@ -70,28 +75,23 @@ const useLogin = () => {
     return useMutation({
         mutationKey: Queries.LOGIN,
         mutationFn: (authUser: AuthUser) => login(authUser),
-        onSuccess: (data: UserLoggedIn) => {
-            const token: string = data.token;
-            localStorage.setItem(Queries.TOKEN, token);
-            // return queryClient.invalidateQueries(Queries.USERS);
-        }
+        onSuccess: (data: UserLoggedIn) => saveUserAfterLogin(data)
     })
 }
 
 const retrieveStoredUser = (): UserRegister => {
-    const user = localStorage.getItem(Queries.LOGGED_USER);
+    const user = localStorage.getItem(Queries.STORED_USER);
     return JSON.parse(user ?? "");
 }
 
 const setStoredUser = (user: UserRegister) => {
     const userJson = JSON.stringify(user);
-    // localStorage.setItem(Queries.TOKEN, token);
-    localStorage.setItem(Queries.LOGGED_USER, userJson);
+    localStorage.setItem(Queries.STORED_USER, userJson);
 }
 
 const useStoredUser = () => {
     return useQuery<UserRegister, Error>({
-        queryKey: Queries.LOGGED_USER,
+        queryKey: Queries.STORED_USER,
         queryFn: () => retrieveStoredUser()
     })
 }
@@ -101,9 +101,39 @@ const useUpdateStoredUser = () => {
     return useMutation({
         mutationKey: "dd",
         mutationFn: async (user: UserRegister) => setStoredUser(user),
-        onSettled: () => queryClient.invalidateQueries(Queries.LOGGED_USER)
+        onSettled: () => queryClient.invalidateQueries(Queries.STORED_USER)
+    })
+}
+
+const retrieveLoggedUser = (): UserModel => {
+    const loggedUser = localStorage.getItem(Queries.LOGGED_USER);
+    return JSON.parse(loggedUser ?? "");
+}
+
+const useLoggedUser = () => {
+    return useQuery<UserModel, Error>({
+        queryKey: Queries.LOGGED_USER,
+        queryFn: () => retrieveLoggedUser()
     })
 }
 
 
-export {useCustomQuery, useBigLayout, useChangeLayout, useRegister, useLogin, useStoredUser, useUpdateStoredUser}
+const useGetCv = () => {
+    return useQuery({
+        queryKey: Queries.GET_CV,
+        queryFn: () => getCv(1)
+    })
+}
+
+
+export {
+    useCustomQuery,
+    useBigLayout,
+    useChangeLayout,
+    useRegister,
+    useLogin,
+    useStoredUser,
+    useUpdateStoredUser,
+    useLoggedUser,
+    useGetCv
+}
