@@ -1,8 +1,16 @@
 import {QueryClient, QueryFunction, useMutation, useQuery, useQueryClient, UseQueryResult} from "react-query";
-import {AppResponse, AuthUser, Model, Registration, UserLoggedIn, UserModel, UserRegister} from "../models/response.ts";
+import {
+    AppResponse,
+    AuthUser, JobPost,
+    Model,
+    Registration,
+    UserLoggedIn,
+    UserModel,
+    UserRegister
+} from "../models/response.ts";
 import {useState} from "react";
 import {Queries} from "../constants/constants.ts";
-import {getCv, login, register} from "../api/api.ts";
+import {getCv, getJobPosts, login, register} from "../api/api.ts";
 
 type TransformerFunction = <T extends Model>(response: AppResponse) => T;
 
@@ -125,6 +133,12 @@ const useGetCv = () => {
     })
 }
 
+const useJobs = () => {
+    return useQuery<JobPost[], Error>({
+        queryKey: Queries.GET_JOB_POSTS,
+        queryFn: () => getJobPosts()
+    })
+}
 
 export {
     useCustomQuery,
@@ -135,5 +149,6 @@ export {
     useStoredUser,
     useUpdateStoredUser,
     useLoggedUser,
-    useGetCv
+    useGetCv,
+    useJobs
 }

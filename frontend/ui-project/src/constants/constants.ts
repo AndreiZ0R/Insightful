@@ -11,5 +11,6 @@ export const Queries = {
     LOGIN: "login",
     STORED_USER: "storedUser",
     LOGGED_USER: "loggedUser",
-    GET_CV: "getCv"
+    GET_CV: "getCv",
+    GET_JOB_POSTS: "getJobPosts"
 }

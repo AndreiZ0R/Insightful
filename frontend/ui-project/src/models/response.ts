@@ -103,6 +103,19 @@ export type Registration = {
     profile: ProfileCreate
 }
 
+export type JobPost = {
+    jobPostingId: bigint,
+    userId: bigint,
+    title: string,
+    description: string,
+    requirements: string,
+    location: string,
+    jobType: string,
+    postedDate: string,
+    applicationDeadLine: string,
+    acceptedDisability: string
+}
+
 type AppResponse = BaseResponse | BaseResponse[]
 
 export type {Model, AppResponse, UserRegister, UserModel, Profile, AuthUser, UserLoggedIn, Study, Experience, Skill}

@@ -1,9 +1,10 @@
-import {AppBar, Box, Button, IconButton, Toolbar, Typography} from '@mui/material';
+import {AppBar, Box, Button, Toolbar, Typography} from '@mui/material';
 import {AccountCircle, Home} from '@mui/icons-material';
 import {Link} from 'react-router-dom';
 
 import logoTransparent from '../../assets/logo_transparent.svg';
 import {BACKGROUND_DARK} from "../../constants/theming.ts";
+import {JobPost as JobPostType} from "../../models/response.ts";
 
 // type NavbarProps = {
 //     isRecruiter?: boolean
@@ -31,38 +32,39 @@ export default function Navbar() {
     //         redirectToSearch();
     //     }
     // };
+    const iconStyle = {
+        fontSize: '2.5rem',
+    };
 
     return (
         <AppBar position="static" sx={{
             backgroundColor: BACKGROUND_DARK,
             paddingLeft: '15%',
             paddingRight: '10%',
-            maxHeight: '8vh',
-            alignCenter: 'center'
+            maxHeight: '10vh', // Keep or adjust the maximum height of the navbar
         }}>
-            <Toolbar sx={{justifyContent: 'space-between'}}>
-                <Box sx={{display: 'flex', alignItems: 'center'}}>
-                    <Typography variant="h4">
+            <Toolbar sx={{ justifyContent: 'space-between' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                    <Typography variant="h4" sx={{ display: { xs: 'none', md: 'block' } }}>
                         Insightful
                     </Typography>
-                    <Typography variant="h6" component="div">
-                        <div style={{maxWidth: '40%'}}>
-                            <img src={logoTransparent} alt="logo"
-                                 style={{height: '100%', width: '100%', marginTop: '20px'}}/>
-                        </div>
-                    </Typography>
+                    <div style={{ minWidth: '80px', minHeight: '80px', height: '100%', width: 'auto' }}>
+                        {/* Increase minWidth and minHeight as needed */}
+                        <img src={logoTransparent} alt="logo"
+                             style={{ height: '100%', width: '100%', maxHeight: '15vh' }} />
+                    </div>
                 </Box>
 
-
-                <div>
-                    <Button color="inherit" component={Link} to="/" style={{marginRight: '10vh'}}>
-                        <Home/>
+                <Box style={{alignItems:'center', justifyContent:'center'}}>
+                    <Button color="inherit" component={Link} to="/" style={{marginRight: '10vh', alignItems:'center', justifyContent:'center'}}>
+                        <Home style={iconStyle}/>
                         Home
                     </Button>
 
-                    <IconButton color="inherit" component={Link} to="/profile">
-                        <AccountCircle/>
-                    </IconButton>
+                    <Button color="inherit" component={Link} to="/profile" style={{marginRight: '10vh', alignItems:'center', justifyContent:'center'}}>
+                        <AccountCircle style={iconStyle}/>
+                        Profile
+                    </Button>
 
                     {/*<Paper component="div" sx={{display: 'flex', alignItems: 'center'}}>*/}
                     {/*    <InputBase*/}
@@ -80,7 +82,7 @@ export default function Navbar() {
                     {/*        <SearchIcon/>*/}
                     {/*    </IconButton>*/}
                     {/*</Paper>*/}
-                </div>
+                </Box>
             </Toolbar>
         </AppBar>
     );
