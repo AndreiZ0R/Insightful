@@ -1,17 +1,4 @@
-import {
-    Avatar,
-    Box,
-    Button,
-    Divider,
-    Grid,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
-    Paper,
-    SxProps,
-    Typography,
-} from '@mui/material';
+import {Avatar, Box, Button, Divider, Grid, List, ListItem, ListItemIcon, ListItemText, Paper, SxProps, Typography,} from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import CakeIcon from '@mui/icons-material/Cake';
@@ -19,8 +6,8 @@ import WorkIcon from '@mui/icons-material/Work';
 import SchoolIcon from '@mui/icons-material/School';
 import {useLoggedUser} from '../../hooks/useCustomQuery';
 import Navbar from "../../components/navbar/AppNavBar.tsx";
-import {BACKGROUND_DARK, BACKGROUND_LIGHT, PRIMARY_COLOR} from '../../constants/theming.ts';
-import React, {useEffect} from "react";
+import {BACKGROUND_LIGHT, PRIMARY_COLOR} from '../../constants/theming.ts';
+import {useEffect} from "react";
 import {getCv} from "../../api/api.ts";
 
 export default function ProfilePage() {
@@ -145,10 +132,9 @@ export default function ProfilePage() {
                             ))}
                         </List>
 
-                        {/*todo: fa sa mearga pdf*/}
                         <Button variant="outlined" onClick={() => {
                             console.log("Sending cv request");
-                            getCv(user?.);
+                            user && getCv(user.userId);
                         }} sx={{
                             mt: 2,
                             color: PRIMARY_COLOR,

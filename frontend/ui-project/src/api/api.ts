@@ -1,14 +1,14 @@
-import {AuthUser, Registration, UserLoggedIn} from "../models/response.ts";
+import {AuthUser, JobPost, Registration, UserLoggedIn} from "../models/response.ts";
 import axios, {AxiosRequestConfig, AxiosResponse} from "axios";
 import {Constants, Queries} from "../constants/constants.ts";
-import {JobPost} from "../models/response.ts";
 
-const baseSpring = "http://192.168.35.228:8080/api";
+// const baseSpring = "http://192.168.35.228:8080/api";
+const baseSpring = "/api";
 const userEndpoint = "/user";
 const registerEndpoint = `${baseSpring}${userEndpoint}/userProfile`;
 const loginEndpoint = `${baseSpring}/login`;
-const cvEndpoint = `${baseSpring}/cv/generate`;
-const jobPostsEndpoint = `${baseSpring}/user/alljobs`;
+const cvEndpoint = `${baseSpring}/user/cv/generate`;
+const jobPostsEndpoint = `${baseSpring}/user/allJobs`;
 
 const buildAuthConfig = (): AxiosRequestConfig => {
     const token: string = localStorage.getItem(Queries.TOKEN) ?? "";
@@ -27,7 +27,6 @@ const login = (authUser: AuthUser): Promise<UserLoggedIn> =>
         .then((res: AxiosResponse<UserLoggedIn>): UserLoggedIn => res.data)
 
 const getCv = (id: number) => {
-    console.log('here');
     axios.get(`${cvEndpoint}/${id}`, {
         ...buildAuthConfig(),
         responseType: "blob"
@@ -39,10 +38,9 @@ const getCv = (id: number) => {
     });
 }
 
-const getJobPosts = (): Promise<JobPost[]> => {
-    return axios.get(`${jobPostsEndpoint}`,
-        buildAuthConfig()).then((res: AxiosResponse<JobPost[]>): JobPost[] => res.data)
-}
+const getJobPosts = (): Promise<JobPost[]> =>
+    axios.get(jobPostsEndpoint, buildAuthConfig())
+        .then((res: AxiosResponse<JobPost[]>): JobPost[] => res.data)
 
 export {register, login, getCv, getJobPosts}
 

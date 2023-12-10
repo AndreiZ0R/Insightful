@@ -133,7 +133,7 @@ const useGetCv = () => {
     })
 }
 
-const useJobs = () => {
+const useAllJobs = () => {
     return useQuery<JobPost[], Error>({
         queryKey: Queries.GET_JOB_POSTS,
         queryFn: () => getJobPosts()
@@ -150,5 +150,5 @@ export {
     useUpdateStoredUser,
     useLoggedUser,
     useGetCv,
-    useJobs
+    useAllJobs
 }

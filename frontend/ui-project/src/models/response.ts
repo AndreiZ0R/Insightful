@@ -56,6 +56,7 @@ interface Profile extends Model {
 }
 
 interface UserModel extends UserRegister {
+    userId: number,
     profile: Profile,
 }
 

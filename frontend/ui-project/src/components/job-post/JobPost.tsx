@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {
     Avatar,
-    Card,
-    CardHeader,
-    IconButton,
-    CardContent,
     Box,
-    Typography,
     Button,
+    Card,
+    CardContent,
+    CardHeader,
     Dialog,
-    DialogTitle,
+    DialogActions,
     DialogContent,
-    DialogActions, TextField, SxProps, InputAdornment
+    DialogTitle,
+    InputAdornment,
+    SxProps,
+    TextField,
+    Typography
 } from "@mui/material";
 
 import PersonIcon from '@mui/icons-material/Person';
@@ -21,8 +23,14 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import DescriptionIcon from '@mui/icons-material/Description';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import StopIcon from '@mui/icons-material/Stop';
+import PauseIcon from '@mui/icons-material/Pause';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import {PRIMARY_COLOR, SECONDARY_COLOR} from "../../constants/theming.ts";
 import {JobPost as JobPostType} from "../../models/response.ts";
+import Speech from "react-text-to-speech";
 
 type JobPostProps = {
     jobPost: JobPostType
@@ -57,20 +65,19 @@ export default function JobPost({jobPost}: JobPostProps) {
 
     const handleClose = () => {
         setOpen(false);
-        setApplicationData({ ...applicationData, email: '', coverLetter: '', cv: null }); // Reset specific fields
+        setApplicationData({...applicationData, email: '', coverLetter: '', cv: null}); // Reset specific fields
     };
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setApplicationData(prevData => ({ ...prevData, [name]: value }));
+        const {name, value} = e.target;
+        setApplicationData(prevData => ({...prevData, [name]: value}));
     };
 
     const handleFileChange = (e) => {
-        setApplicationData({ ...applicationData, cv: e.target.files[0] });
+        setApplicationData({...applicationData, cv: e.target.files[0]});
     };
 
     const handleApply = () => {
-        // Logic for applying to the job
         console.log("Applying to job:", jobPost.title);
         setOpen(false);
     };
@@ -78,6 +85,34 @@ export default function JobPost({jobPost}: JobPostProps) {
     const formatDate = (dateString: string) => {
         return new Date(dateString).toLocaleDateString();
     };
+
+    const startPlayBtn = (
+        <>
+            <Button variant="outlined" sx={buttonSx}>
+                <PlayArrowIcon>
+                </PlayArrowIcon>
+                Play Audio
+            </Button>
+        </>
+    );
+
+    const pausePlayBtn = (
+        <>
+            <Button variant="outlined" sx={buttonSx}>
+                <PauseIcon></PauseIcon>
+                Pause
+            </Button>
+        </>
+    );
+
+    const stopPlayBtn = (
+        <>
+            <Button sx={buttonSx}>
+                <StopIcon></StopIcon>
+                Stop
+            </Button>
+        </>
+    );
 
     return (
         <>
@@ -94,6 +129,20 @@ export default function JobPost({jobPost}: JobPostProps) {
                     subheader={`Posted on: ${formatDate(jobPost.postedDate)}`}
                     titleTypographyProps={{variant: 'h6'}}></CardHeader>
                 <CardContent>
+                    <Speech
+                        text={
+                            `Job title: ${jobPost.title}, 
+                             posted on: ${jobPost.postedDate}
+                             job description: ${jobPost.description}, 
+                             location: ${jobPost.location}, 
+                             having the accepted disabilities: ${jobPost.acceptedDisability}, 
+                             and requirements: ${jobPost.requirements}`
+                        }
+                        startBtn={startPlayBtn}
+                        stopBtn={stopPlayBtn}
+                        pauseBtn={pausePlayBtn}
+                    />
+
                     <Typography variant="body2" color="text.secondary" gutterBottom>
                         {jobPost.description}
                     </Typography>
@@ -102,18 +151,27 @@ export default function JobPost({jobPost}: JobPostProps) {
                         <Typography variant="caption">{jobPost.location}</Typography>
                     </Box>
                     <Box sx={{display: 'flex', alignItems: 'center', gap: 1, mt: 1}}>
-                        <AccessTimeIcon color="action" fontSize="large" sx={iconsSx} />
+                        <AccessTimeIcon color="action" fontSize="large" sx={iconsSx}/>
                         <Typography variant="caption">Deadline: {formatDate(jobPost.applicationDeadLine)}</Typography>
                     </Box>
                     <Box sx={{display: 'flex', alignItems: 'center', gap: 1, mt: 1}}>
-                        <AccessTimeIcon color="action" fontSize="large" sx={iconsSx}/>
+                        <CheckCircleIcon color="action" fontSize="large" sx={iconsSx}/>
                         <Typography variant="caption">Accepted disability: {jobPost.acceptedDisability}</Typography>
                     </Box>
-                    <Button variant="contained"  onClick={handleClickOpen} sx={{ mt: 2, backgroundColor: SECONDARY_COLOR,
+
+                    <Box sx={{display: 'flex', alignItems: 'center', gap: 1, mt: 1}}>
+                        <PlaylistAddCheckIcon color="action" fontSize="large" sx={iconsSx}/>
+                        <Typography variant="caption">Requirements: {jobPost.requirements}</Typography>
+                    </Box>
+
+
+                    <Button variant="contained" onClick={handleClickOpen} sx={{
+                        mt: 2, backgroundColor: SECONDARY_COLOR,
                         borderColor: PRIMARY_COLOR,
                         '&:hover': {
                             borderColor: PRIMARY_COLOR
-                        } }}>
+                        }
+                    }}>
                         Apply Job
                     </Button>
                 </CardContent>
@@ -207,12 +265,14 @@ export default function JobPost({jobPost}: JobPostProps) {
                         variant="contained"
                         component="label"
                         startIcon={<DescriptionIcon sx={buttonSx}/>}
-                        sx={{backgroundColor: PRIMARY_COLOR,
+                        sx={{
+                            backgroundColor: PRIMARY_COLOR,
                             borderColor: PRIMARY_COLOR,
                             '&:hover': {
                                 borderColor: PRIMARY_COLOR,
                                 backgroundColor: SECONDARY_COLOR
-                            }}}
+                            }
+                        }}
                     >
                         Upload CV
                         <input
@@ -225,16 +285,20 @@ export default function JobPost({jobPost}: JobPostProps) {
                     </Button>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} sx={{backgroundColor: PRIMARY_COLOR,
+                    <Button onClick={handleClose} sx={{
+                        backgroundColor: PRIMARY_COLOR,
                         borderColor: PRIMARY_COLOR,
                         '&:hover': {
                             borderColor: PRIMARY_COLOR
-                        }}}>Cancel</Button>
-                    <Button onClick={handleApply} variant="outlined" sx={{backgroundColor: SECONDARY_COLOR,
+                        }
+                    }}>Cancel</Button>
+                    <Button onClick={handleApply} variant="outlined" sx={{
+                        backgroundColor: SECONDARY_COLOR,
                         borderColor: PRIMARY_COLOR,
                         '&:hover': {
                             borderColor: PRIMARY_COLOR
-                        }}}>Apply</Button>
+                        }
+                    }}>Apply</Button>
                 </DialogActions>
             </Dialog>
         </>
