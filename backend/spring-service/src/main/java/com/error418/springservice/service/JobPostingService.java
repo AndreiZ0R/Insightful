@@ -20,9 +20,10 @@ public class JobPostingService {
 
     public List<JobPosting> getAllJobPostings() {
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-        return jobPostingRepository.findAll(Sort.by(Sort.Order.asc("postedDate"), Sort.Order.desc("applicationDeadline"))).stream()
-                .filter(jobPosting -> jobPosting.getApplicationDeadline().after(currentTimestamp))
-                .collect(Collectors.toList());
+        return jobPostingRepository.findAll();
+//                .stream()
+//                .filter(jobPosting -> jobPosting.getApplicationDeadline().after(currentTimestamp))
+//                .collect(Collectors.toList());
     }
 
     public JobPosting saveJobPosting(JobPosting jobPosting) {

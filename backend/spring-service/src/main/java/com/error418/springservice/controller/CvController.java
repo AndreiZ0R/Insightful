@@ -10,7 +10,7 @@ import java.io.ByteArrayInputStream;
 // import other necessary classes
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/user/cv")
 @CrossOrigin
 public class CvController {
 
@@ -20,7 +20,7 @@ public class CvController {
         this.pdfService = pdfService;
     }
 
-    @PostMapping("/generate/{id}")
+    @GetMapping("/generate/{id}")
     public ResponseEntity<InputStreamResource> generateCv(@PathVariable Long id) {
         byte[] pdfBytes = pdfService.createPdf(id);
         InputStreamResource resource = new InputStreamResource(new ByteArrayInputStream(pdfBytes));
