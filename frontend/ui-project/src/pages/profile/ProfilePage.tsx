@@ -1,4 +1,4 @@
-import {useLoggedUser} from "../../hooks/useCustomQuery.ts";
+import {useStoredUser} from "../../hooks/useCustomQuery.ts";
 
 export default function ProfilePage() {
     // const {profileId} = useParams();
@@ -6,7 +6,7 @@ export default function ProfilePage() {
     //     console.log(profileId)
     // }, [profileId]);
 
-    const {data: user} = useLoggedUser();
+    const {data: user} = useStoredUser();
 
     return (
         <>

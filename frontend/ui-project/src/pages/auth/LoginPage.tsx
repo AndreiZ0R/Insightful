@@ -2,14 +2,15 @@ import {useNavigate} from "react-router-dom";
 import {ChangeEvent, useState} from "react";
 import AppInput from "../../components/input/AppInput.tsx";
 import AuthCard from "./AuthCard.tsx";
-import {useLogin, useUpdateLoggedUser} from "../../hooks/useCustomQuery.ts";
+import {useChangeLayout, useLogin, useUpdateStoredUser} from "../../hooks/useCustomQuery.ts";
 import {AuthUser, UserLoggedIn} from "../../models/response.ts";
 
 
 export default function LoginPage() {
     const navigate = useNavigate();
     const loginMutation = useLogin();
-    const setLoggedUser = useUpdateLoggedUser();
+    const setLoggedUser = useUpdateStoredUser();
+    const changeLayout = useChangeLayout();
 
     const [loginForm, setLoginForm] = useState<AuthUser>({
         email: "",
@@ -27,6 +28,7 @@ export default function LoginPage() {
         loginMutation.mutate(loginForm, {
             onSuccess: (data: UserLoggedIn) => {
                 setLoggedUser.mutate(data);
+                changeLayout.mutate({bigLayout: data.user.partialBlindness})
                 navigate("/");
             }
         });

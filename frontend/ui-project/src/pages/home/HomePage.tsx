@@ -1,10 +1,10 @@
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import {Queries} from "../../constants/constants.ts";
-import {useLoggedUser} from "../../hooks/useCustomQuery.ts";
+import {useStoredUser} from "../../hooks/useCustomQuery.ts";
 
 export default function HomePage() {
-    const {data: user} = useLoggedUser();
+    const {data: user} = useStoredUser();
     const navigate = useNavigate();
 
     useEffect(() => {

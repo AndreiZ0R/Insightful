@@ -1,5 +1,5 @@
 import {QueryClient, QueryFunction, useMutation, useQuery, useQueryClient, UseQueryResult} from "react-query";
-import {AppResponse, AuthUser, Model, UserLoggedIn, UserModel, UserRegister} from "../models/response.ts";
+import {AppResponse, AuthUser, Model, Registration, UserLoggedIn, UserRegister} from "../models/response.ts";
 import {useState} from "react";
 import {Queries} from "../constants/constants.ts";
 import {login, register} from "../api/api.ts";
@@ -57,12 +57,11 @@ const useRegister = () => {
     // const queryClient: QueryClient = useQueryClient();
     return useMutation({
         mutationKey: Queries.REGISTER,
-        mutationFn: (userRegister: UserRegister) => register(userRegister),
-        // onSuccess: (data: UserModel) => {
-        //TODO: this
-        // const token: string = data.token;
-        // localStorage.setItem(Queries.TOKEN, token);
-        // }
+        mutationFn: (registration: Registration) => register(registration),
+        onSuccess: (data: UserLoggedIn) => {
+            const token: string = data.token;
+            localStorage.setItem(Queries.TOKEN, token);
+        }
     })
 }
 
@@ -79,32 +78,32 @@ const useLogin = () => {
     })
 }
 
-const retrieveLoggedUser = (): UserModel => {
+const retrieveStoredUser = (): UserRegister => {
     const user = localStorage.getItem(Queries.LOGGED_USER);
     return JSON.parse(user ?? "");
 }
 
-const setLoggedUser = ({user, token}: UserLoggedIn) => {
+const setStoredUser = (user: UserRegister) => {
     const userJson = JSON.stringify(user);
-    localStorage.setItem(Queries.TOKEN, token);
+    // localStorage.setItem(Queries.TOKEN, token);
     localStorage.setItem(Queries.LOGGED_USER, userJson);
 }
 
-const useLoggedUser = () => {
-    return useQuery<UserModel, Error>({
+const useStoredUser = () => {
+    return useQuery<UserRegister, Error>({
         queryKey: Queries.LOGGED_USER,
-        queryFn: () => retrieveLoggedUser()
+        queryFn: () => retrieveStoredUser()
     })
 }
 
-const useUpdateLoggedUser = () => {
+const useUpdateStoredUser = () => {
     const queryClient: QueryClient = useQueryClient();
     return useMutation({
         mutationKey: "dd",
-        mutationFn: async (user: UserLoggedIn) => setLoggedUser(user),
+        mutationFn: async (user: UserRegister) => setStoredUser(user),
         onSettled: () => queryClient.invalidateQueries(Queries.LOGGED_USER)
     })
 }
 
 
-export {useCustomQuery, useBigLayout, useChangeLayout, useRegister, useLogin, useLoggedUser, useUpdateLoggedUser}
+export {useCustomQuery, useBigLayout, useChangeLayout, useRegister, useLogin, useStoredUser, useUpdateStoredUser}

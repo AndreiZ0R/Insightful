@@ -1,14 +1,14 @@
-import {AuthUser, UserLoggedIn, UserModel, UserRegister} from "../models/response.ts";
+import {AuthUser, Registration, UserLoggedIn} from "../models/response.ts";
 import axios, {AxiosResponse} from "axios";
 
 const baseSpring = "http://192.168.35.228:8080/api";
 const userEndpoint = "/user";
-const registerEndpoint = `${baseSpring}${userEndpoint}/register`;
+const registerEndpoint = `${baseSpring}${userEndpoint}/userProfile`;
 const loginEndpoint = `${baseSpring}/login`;
 
 
-const register = (userRegister: UserRegister): Promise<UserModel> =>
-    axios.post(registerEndpoint, userRegister).then((res: AxiosResponse<UserModel>): UserModel => res.data)
+const register = (registration: Registration): Promise<UserLoggedIn> =>
+    axios.post(registerEndpoint, registration).then((res: AxiosResponse<UserLoggedIn>): UserLoggedIn => res.data)
 
 
 // const buildAuthConfig = (): AxiosRequestConfig => {

@@ -4,17 +4,17 @@ import {ChangeEvent, useEffect, useState} from "react";
 import AppInput from "../../components/input/AppInput.tsx";
 import {useNavigate} from "react-router-dom";
 import AuthCard from "./AuthCard.tsx";
-import {useRegister} from "../../hooks/useCustomQuery.ts";
+import {useChangeLayout, useUpdateStoredUser} from "../../hooks/useCustomQuery.ts";
 import AppCheckbox from "../../components/AppCheckbox/AppCheckbox.tsx";
 import AppDatePicker from "../../components/date-picker/AppDatePicker.tsx";
 import {UserRegister} from "../../models/response.ts";
-import {Queries} from "../../constants/constants.ts";
 
 export default function RegisterPage() {
     // const {data: bigLayout} = useBigLayout();
-    // const layoutMutation = useChangeLayout();
+    const changeLayout = useChangeLayout();
     const navigate = useNavigate();
-    const registerMutation = useRegister();
+    // const registerMutation = useRegister();
+    const updateUser = useUpdateStoredUser();
 
     const [partialBlindness, setPartialBlindness] = useState<boolean>(false)
     const [fullBlindness, setFullBlindness] = useState<boolean>(false)
@@ -63,12 +63,10 @@ export default function RegisterPage() {
     }
 
     const doRegister = () => {
-        registerMutation.mutate(registerForm, {
+        changeLayout.mutate({bigLayout: registerForm.partialBlindness});
+        updateUser.mutate(registerForm, {
             onSuccess: () => {
-                const token = localStorage.getItem(Queries.TOKEN);
-                if (token) {
-                    navigate("/create-profile")
-                }
+                navigate("/create-profile");
             }
         })
     }

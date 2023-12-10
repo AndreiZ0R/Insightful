@@ -64,6 +64,45 @@ interface UserLoggedIn extends Model {
     token: string
 }
 
+export type SkillCreate = {
+    skillName: string;
+};
+
+export type StudyCreate = {
+    startDate: string,
+    endDate: string,
+    degree: string,
+    studyLocation: string
+}
+
+export type ExperienceCreate = {
+    startDate: string;
+    endDate: string;
+    company: string;
+    position: string;
+    skills: SkillCreate[];
+};
+
+export type ProfileCreate = {
+    currentTitle: string;
+    currentWorkplace: string;
+    description: string;
+    experiences: ExperienceCreate[];
+    studies: StudyCreate[]
+};
+
+export type Registration = {
+    name: string,
+    password: string,
+    email: string,
+    birthDate: string,
+    phoneNumber: string,
+    partialBlindness: boolean,
+    fullBlindness: boolean,
+    userType: UserType,
+    profile: ProfileCreate
+}
+
 type AppResponse = BaseResponse | BaseResponse[]
 
-export type {Model, AppResponse, UserRegister, UserModel, Profile, AuthUser, UserLoggedIn}
+export type {Model, AppResponse, UserRegister, UserModel, Profile, AuthUser, UserLoggedIn, Study, Experience, Skill}
